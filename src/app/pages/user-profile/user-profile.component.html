@@ -1,0 +1,120 @@
+<div class="row w-100 m-0 mt-2 mb-1">
+  <div class="col-12 col-sm-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-white">
+        <h5 class="mb-0">My account</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="userForm">
+          <h6 class="heading-small text-muted mb-2">User information</h6>
+          <div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-username">Full Name</label>
+                  <input type="text" id="input-username" class="form-control form-control-alternative" formControlName="fullName" placeholder="Full Name">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-email">Email address</label>
+                  <input type="email" id="input-email" class="form-control form-control-alternative" formControlName="email" placeholder="jessica@example.com">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-first-name">Phone Number</label>
+                  <input type="text" id="input-first-name" class="form-control form-control-alternative" formControlName="contact" placeholder="+91-****-***-***">
+                </div>
+              </div>
+              <!-- <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-last-name">Last name</label>
+                  <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jone">
+                </div>
+              </div> -->
+            </div>
+          </div>
+          <hr class="my-2" />
+          <!-- Address -->
+          <h6 class="heading-small text-muted mb-2">Contact information</h6>
+          <div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-address">Address</label>
+                  <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" formControlName="street" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-city">City</label>
+                  <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" formControlName="city">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-country">Postal code</label>
+                  <input type="tel" id="input-postal-code" class="form-control form-control-alternative" formControlName="pincode" placeholder="Postal code">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-country">Country</label>
+                  <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" formControlName="country">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="input-country">State</label>
+                  <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" formControlName="state">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <hr class="my-2" />
+          <h6 class="heading-small text-muted mb-2">About me</h6>
+          <div>
+            <div class="form-group">
+              <label>About Me</label>
+              <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+            </div>
+          </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-4">
+    <div class="card shadow-sm" style="margin-top: 7rem;">
+      <img
+        src="https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/photos/term-bg-1-c98135712157fb21286eafd480f610f9.jpg"
+        style="border-radius: 50%; width: 200px; height: 200px; object-fit: contain; margin: auto; margin-top: -7rem;">
+      <div class="card-body">
+        <div class="text-center mt-2">
+          <h3>{{ user.fullName }}</h3>
+          <div class="h5 font-weight-300 d-flex align-items-center justify-content-center" *ngIf="user.street !== 'null'">
+            <i class="material-icons mr-1">place</i>
+            <span>{{ user.street }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer bg-white border-0">
+        <div class="row">
+          <div class="col d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-dark" (click)="updateProfile()" [disabled]="loader">
+              Update Profile
+              <span *ngIf="loader">&nbsp;</span>
+              <div *ngIf="loader" class="spinner-border spinner-border-sm text-white" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

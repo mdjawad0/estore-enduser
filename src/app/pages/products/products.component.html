@@ -1,0 +1,84 @@
+<div class="container-fluid mt-2">
+  <div class="row w-100 m-0" *ngIf="fetching">
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="row w-100 m-0 mt-2" *ngIf="!fetching">
+    <div class="col-12  my-3">
+      <div class="row">
+        <div class="col-12 col-sm-8">
+          <div class="d-flex flex-column">
+            <span class="text-muted text-sm mb-1">Filter by</span>
+            <div class="d-flex align-items-center">
+              <button *ngFor="let category of categories; index as idx" class="btn btn-sm mb-2 mr-2" [ngClass]="{
+                'btn-dark': selectedCategoryIdx === idx,
+                'btn-outline-dark': selectedCategoryIdx !== idx
+              }" (click)="filtersProductsBasedCategory(category.categoryId, idx)">
+                {{ category?.categoryName || "" }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4">
+          <div class="d-flex flex-column justify-content-end align-items-end" style="height: 100%;">
+            <div ngbDropdown>
+              <button class="btn btn-sm btn-outline-dark mb-2" id="dropdownBasic1" ngbDropdownToggle>Sort Items</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>By Price [Lowest to Highest]</button>
+                <button ngbDropdownItem>By Price [Highest to Lowest]</button>
+                <button ngbDropdownItem>By Rating</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div class="col-12" *ngIf="products.length === 0">
+      <div class="card border">
+        <div class="card-body">
+          <div class="row w-100 m-0">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center p-4">
+              <img src="./../../../assets/empty.svg" alt="No Products" class="img-fluid" width="128px" height="128px">
+              <h4 class="m-0 mt-4 card-title">No Products Found</h4>
+              <h6 class="m-0 mt-1 card-subtitle text-muted">{{ categories[selectedCategoryIdx]?.categoryName }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="products.length !== 0">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let product of products">
+        <div class="card shadow-sm" style="height: 100%;">
+          <img [src]="product['images'][product['thumbnailImage']]" alt="" class="card-img-top img" *ngIf="product.images.length !== 0">
+          <div class="card-body">
+            <h5 class="m-0 font-weight-bold card-title">
+              {{ product["productTitle"] }}
+            </h5>
+            <h6 class="m-0 font-weight-bold card-subtitle text-muted">
+              {{ product["productCode"] }}
+            </h6>
+            <p class="card-text text-limit mt-2">
+              {{ product["productDescription"] }}
+            </p>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <div class="d-flex justify-content-evenly align-items-center">
+              <button type="button" class="btn btn-sm btn-dark mr-2">
+                Buy Now
+              </button>
+              <button type="button" class="btn btn-sm btn-dark mr-2" (click)="db.addProductToList(product['productId'], true)">
+                Add to Cart
+              </button>
+              <button type="button" class="btn btn-sm btn-dark" (click)="db.addProductToList(product['productId'], false)">
+                Add to Whishlist
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
