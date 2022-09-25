@@ -7,7 +7,7 @@ pipeline {
         stage('Source') {
             steps {
                 // Get  code from a GitHub repository
-                git 'https://github.com/latifb2022/estore-end-user.git'
+                git 'https://github.com/mdjawad0/estore-enduser.git'
 
                 // Run npm install
                 sh "npm install"
